@@ -8,6 +8,16 @@ const campoTfm = document.getElementById("tfm");
 const campoProva = document.getElementById("prova");
 const campoOutraAtividade = document.getElementById("campo-outra-atividade");
 const inputOutraAtividade = document.getElementById("outra-atividade");
+const botaoSalvar = document.getElementById("btn-salvar");
+const iconeSalvar = botaoSalvar.querySelector("i");
+const textoSalvar = botaoSalvar.querySelector("span");
+
+function definirCarregamentoSalvar(estaCarregando) {
+	botaoSalvar.disabled = estaCarregando;
+	botaoSalvar.classList.toggle("carregando", estaCarregando);
+	iconeSalvar.className = estaCarregando ? "bi bi-gear-fill" : "bi bi-floppy";
+	textoSalvar.textContent = estaCarregando ? "Salvando..." : "Salvar Apontamento";
+}
 
 campoData.value = new Date().toISOString().split("T")[0];
 
@@ -47,6 +57,10 @@ campoProva.addEventListener("change", () => {
 
 form.addEventListener("submit", async (event) => {
 	event.preventDefault();
+
+	if (botaoSalvar.disabled) {
+		return;
+	}
 
 	const quilometragemInicial = Number(document.getElementById("km-inicial").value);
 	const quilometragemFinal = Number(document.getElementById("km-final").value);
@@ -100,6 +114,7 @@ form.addEventListener("submit", async (event) => {
 	}
 
 	try {
+		definirCarregamentoSalvar(true);
 		console.log(dados);
 
 		await fetch(
@@ -120,5 +135,7 @@ form.addEventListener("submit", async (event) => {
 	} catch (erro) {
 		alert("Erro ao salvar!");
 		console.error(erro);
+	} finally {
+		definirCarregamentoSalvar(false);
 	}
 });

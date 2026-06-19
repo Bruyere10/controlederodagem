@@ -14,7 +14,7 @@ body{
 
 .header{
     width:100%;
-    height:118px;
+    height:148px;
     background:#001E62;
     display:flex;
     align-items:center;
@@ -38,8 +38,8 @@ body{
 }
 
 .logo-stellantis{
-    height:98px;
-    max-width:430px;
+    height:128px;
+    max-width:560px;
 }
 
 .logo-zeentech{
@@ -253,10 +253,31 @@ body{
     box-shadow:0 8px 18px rgba(0,30,98,0.18);
 }
 
+.btn-salvar:disabled{
+    cursor:not-allowed;
+    opacity:0.78;
+    transform:none;
+    filter:none;
+}
+
+.btn-salvar.carregando i{
+    animation:girarEngrenagem 0.9s linear infinite;
+}
+
 .btn-add:hover,
-.btn-salvar:hover{
+.btn-salvar:hover:not(:disabled){
     transform:translateY(-2px);
     filter:brightness(1.06);
+}
+
+@keyframes girarEngrenagem{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 .card{
@@ -314,7 +335,7 @@ select{
         justify-content:center;
         padding:0 20px;
         height:auto;
-        min-height:124px;
+        min-height:144px;
     }
 
     .header-logos{
@@ -329,8 +350,8 @@ select{
     }
 
     .logo-stellantis{
-        height:76px;
-        max-width:280px;
+        height:96px;
+        max-width:340px;
     }
 
     .logo-zeentech{
